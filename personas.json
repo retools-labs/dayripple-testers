@@ -223,5 +223,50 @@
     "locale": "ko-KR",
     "geo": [37.5665, 126.978],
     "device": {"name": "Pixel 7, Android 14", "profile": "pixel_7", "android_api": 34, "font_scale": 1.0, "theme": "light"}
+  },
+  {
+    "id": "allo-zhtw",
+    "platform": "android",
+    "profile": "Taiwanese traveller in her twenties visiting Busan and checking Traditional Chinese carefully.",
+    "goal": "Find a Busan shop, view its menu, add an item, and reach the screen before the order is sent. Change languages and view the shop on a map. Never press any final submit/send/apply/login button; stop at the screen before it.",
+    "locale": "zh-TW",
+    "geo": [35.1796, 129.0756],
+    "device": {"name": "Pixel 6, Android 13", "profile": "pixel_6", "android_api": 33, "font_scale": 1.0, "theme": "light"}
+  },
+  {
+    "id": "allo-ja",
+    "platform": "android",
+    "profile": "Japanese traveller in his thirties who wants a clear, reliable way to find shops in Busan.",
+    "goal": "Find a Busan shop, inspect its menu, and proceed to the order form without sending it. Change languages and view the shop on a map. Never press any final submit/send/apply/login button; stop at the screen before it.",
+    "locale": "ja-JP",
+    "geo": [35.1796, 129.0756],
+    "device": {"name": "Pixel 7, Android 14", "profile": "pixel_7", "android_api": 34, "font_scale": 1.0, "theme": "light"}
+  },
+  {
+    "id": "allo-zhcn",
+    "platform": "android",
+    "profile": "Mainland Chinese traveller in their twenties comparing food shops while visiting Busan.",
+    "goal": "Search for a Busan shop, view the menu, add an item, and reach the screen before submitting an order. Change languages and view the shop on a map. Never press any final submit/send/apply/login button; stop at the screen before it.",
+    "locale": "zh-CN",
+    "geo": [35.1796, 129.0756],
+    "device": {"name": "Pixel 6, Android 13", "profile": "pixel_6", "android_api": 33, "font_scale": 1.0, "theme": "light"}
+  },
+  {
+    "id": "allo-en",
+    "platform": "android",
+    "profile": "English-speaking traveller looking for an easy way to discover local Busan shops.",
+    "goal": "Find a Busan shop, check its menu, add an item, and reach the order form just before it is sent. Change languages and view the shop on a map. Never press any final submit/send/apply/login button; stop at the screen before it.",
+    "locale": "en-US",
+    "geo": [35.1796, 129.0756],
+    "device": {"name": "Pixel 7, Android 14", "profile": "pixel_7", "android_api": 34, "font_scale": 1.0, "theme": "light"}
+  },
+  {
+    "id": "allo-vi",
+    "platform": "android",
+    "profile": "Vietnamese traveller in their twenties exploring local shops during a Busan trip.",
+    "goal": "Search for a Busan shop, inspect its menu, and reach the order form before the final send action. Change languages and view the shop on a map. Never press any final submit/send/apply/login button; stop at the screen before it.",
+    "locale": "vi-VN",
+    "geo": [35.1796, 129.0756],
+    "device": {"name": "Pixel 6, Android 13", "profile": "pixel_6", "android_api": 33, "font_scale": 1.0, "theme": "light"}
   }
 ]

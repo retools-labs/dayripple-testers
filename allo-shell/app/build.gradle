@@ -1,0 +1,31 @@
+apply plugin: 'com.android.application'
+
+def alloUrl = (project.findProperty('alloUrl') ?: 'https://allthatlocal.com/').toString()
+
+android {
+    namespace 'kr.retools.alloshell'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'kr.retools.alloshell'
+        minSdk 29
+        targetSdk 36
+        versionCode 1
+        versionName '1.0'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        buildConfigField 'String', 'ALLO_URL', "\"${alloUrl}\""
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
