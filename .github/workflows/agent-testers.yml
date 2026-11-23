@@ -25,7 +25,7 @@ on:
         default: capacitor
       android_build:
         description: "Custom Android build command or prebuilt download (optional, then set apk_path)"
-        default: "NEXT_PUBLIC_DR_LOCALES=ko,en,zh-TW,ja npm ci && npm run build:cap && npx cap sync android && (cd android && chmod +x gradlew && ./gradlew assembleDebug --build-cache)"
+        default: "export NEXT_PUBLIC_DR_LOCALES=ko,en,zh-TW,ja NEXT_PUBLIC_RC_ANDROID_KEY=goog_dummy_ci_test && npm ci && npm run build:cap && npx cap sync android && (cd android && chmod +x gradlew && ./gradlew assembleDebug --build-cache)"
       apk_path:
         description: Path of the .apk produced by android_build
         default: "android/app/build/outputs/apk/debug/app-debug.apk"
