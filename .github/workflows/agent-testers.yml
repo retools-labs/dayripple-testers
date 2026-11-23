@@ -31,19 +31,19 @@ on:
         default: "android/app/build/outputs/apk/debug/app-debug.apk"
       ios_build:
         description: "Custom iOS build command or prebuilt download (optional, then set ios_app_path)"
-        default: retools-labs/dayripple
+        default: ""
       ios_app_path:
         description: Path of the Simulator .app produced by ios_build
-        default: feat-i18n
+        default: ""
       build_args:
         description: "Extra arguments for the automatic build, both platforms: --dart-define=API_URL=https://... for Flutter, Gradle and xcodebuild arguments for the others. Public on a public repo: put keys in the BUILD_ARGS secret"
         default: ""
       source_repo:
         description: owner/name of the app repo (empty = this repo)
-        default: ""
+        default: "retools-labs/dayripple"
       ref:
         description: Branch, tag or full SHA of the app repo (empty = default branch)
-        default: ""
+        default: "feat-i18n"
       brief:
         description: Agent brief file
         default: AGENT_BRIEF.md
