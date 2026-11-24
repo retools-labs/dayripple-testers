@@ -17,6 +17,16 @@ if [ "$(adb shell getprop persist.sys.locale | tr -d '\r')" != "$LOCALE" ]; then
   adb shell "setprop persist.sys.locale $LOCALE; setprop ctl.restart zygote"; sleep 10; adb wait-for-device
   for i in $(seq 1 60); do [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = 1 ] && break; sleep 3; done
 fi
+# Navigation mode
+if [ "${NAV_MODE:-}" = "three" ]; then
+  echo "Navigation mode: $NAV_MODE"
+  adb shell cmd overlay enable-exclusive --category com.android.internal.systemui.navbar.threebutton >/dev/null 2>&1 || adb shell cmd overlay enable com.android.internal.systemui.navbar.threebutton >/dev/null 2>&1
+  sleep 3
+elif [ "${NAV_MODE:-}" = "gesture" ]; then
+  echo "Navigation mode: $NAV_MODE"
+  adb shell cmd overlay enable-exclusive --category com.android.internal.systemui.navbar.gestural >/dev/null 2>&1 || adb shell cmd overlay enable com.android.internal.systemui.navbar.gestural >/dev/null 2>&1
+  sleep 3
+fi
 # 3. App + persona settings. The package inside the APK wins over app_id
 # (which may be the iOS bundle id)
 AAPT2=$(ls "${ANDROID_HOME:-/usr/local/lib/android/sdk}"/build-tools/*/aapt2 2>/dev/null | sort -V | tail -1)

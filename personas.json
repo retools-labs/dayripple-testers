@@ -268,5 +268,50 @@
     "locale": "vi-VN",
     "geo": [35.1796, 129.0756],
     "device": {"name": "Pixel 6, Android 13", "profile": "pixel_6", "android_api": 33, "font_scale": 1.0, "theme": "light"}
+  },
+  {
+    "id": "dr-nav3",
+    "platform": "android",
+    "profile": "3버튼 내비게이션을 쓰는 평범한 사용자.",
+    "goal": "첫 실행부터 매듭 3개·노리개 뽑기·3줄 일기·월 도감까지 처음 쓰듯 눌러 본다. 로그인·결제·권한 요청 화면은 누르지 않고 건너뛴다. 입력은 시험용 글만 쓴다.",
+    "locale": "ko-KR",
+    "geo": [37.5665, 126.978],
+    "device": {"name": "Pixel 6, Android 14", "profile": "pixel_6", "android_api": 34, "font_scale": 1.0, "theme": "light", "nav": "three"}
+  },
+  {
+    "id": "dr-navg",
+    "platform": "android",
+    "profile": "제스처 내비게이션을 쓰는 평범한 사용자.",
+    "goal": "첫 실행부터 매듭 3개·노리개 뽑기·3줄 일기·월 도감까지 처음 쓰듯 눌러 본다. 로그인·결제·권한 요청 화면은 누르지 않고 건너뛴다. 입력은 시험용 글만 쓴다.",
+    "locale": "ko-KR",
+    "geo": [37.5665, 126.978],
+    "device": {"name": "Pixel 6, Android 14", "profile": "pixel_6", "android_api": 34, "font_scale": 1.0, "theme": "light", "nav": "gesture"}
+  },
+  {
+    "id": "dr-tablet",
+    "platform": "android",
+    "profile": "큰 화면 태블릿을 쓰는 평범한 사용자.",
+    "goal": "첫 실행부터 매듭 3개·노리개 뽑기·3줄 일기·월 도감까지 처음 쓰듯 눌러 본다. 로그인·결제·권한 요청 화면은 누르지 않고 건너뛴다. 입력은 시험용 글만 쓴다.",
+    "locale": "ko-KR",
+    "geo": [37.5665, 126.978],
+    "device": {"name": "Pixel Tablet, Android 14", "profile": "pixel_tablet", "android_api": 34, "font_scale": 1.0, "theme": "light"}
+  },
+  {
+    "id": "dr-dark",
+    "platform": "android",
+    "profile": "다크 모드를 쓰는 평범한 사용자.",
+    "goal": "첫 실행부터 매듭 3개·노리개 뽑기·3줄 일기·월 도감까지 처음 쓰듯 눌러 본다. 로그인·결제·권한 요청 화면은 누르지 않고 건너뛴다. 입력은 시험용 글만 쓴다.",
+    "locale": "ko-KR",
+    "geo": [37.5665, 126.978],
+    "device": {"name": "Pixel 7, Android 14", "profile": "pixel_7", "android_api": 34, "font_scale": 1.0, "theme": "dark"}
+  },
+  {
+    "id": "dr-slow",
+    "platform": "android",
+    "profile": "느린 망을 쓰는 평범한 사용자.",
+    "goal": "첫 실행부터 매듭 3개·노리개 뽑기·3줄 일기·월 도감까지 처음 쓰듯 눌러 본다. 처음 열 때 로딩·빈 화면을 본다. 로그인·결제·권한 요청 화면은 누르지 않고 건너뛴다. 입력은 시험용 글만 쓴다.",
+    "locale": "ko-KR",
+    "geo": [37.5665, 126.978],
+    "device": {"name": "Pixel 7, Android 14", "profile": "pixel_7", "android_api": 34, "font_scale": 1.0, "theme": "light", "net": "slow"}
   }
 ]

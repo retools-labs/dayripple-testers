@@ -242,6 +242,7 @@ jobs:
           THEME: ${{ matrix.theme }}
           LOCALE: ${{ matrix.locale }}
           GEO: ${{ matrix.geo }}
+          NAV_MODE: ${{ matrix.nav }}
           APP_ID: ${{ inputs.app_id }}
           BRIEF: ${{ inputs.bug_report != '' && inputs.brief == 'AGENT_BRIEF.md' && 'briefs/reproduce.md' || inputs.brief }}
           MODEL: ${{ inputs.model }}
@@ -256,7 +257,7 @@ jobs:
           profile: ${{ steps.profile.outputs.profile }}
           ram-size: 4096M
           disable-animations: true
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -dns-server 127.0.0.1
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -dns-server 127.0.0.1${{ matrix.net == 'slow' && ' -netspeed edge -netdelay umts' || '' }}
           script: bash scripts/android/run_agent.sh
 
       - name: Encrypt results
