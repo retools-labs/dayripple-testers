@@ -186,7 +186,7 @@
     "goal": "오늘 할 일 3개를 매듭으로 올려 모두 묶고 노리개를 뽑는다. 로그인·결제·권한 요청 화면은 누르지 않고 건너뛴다. 입력은 시험용 글만 쓴다.",
     "locale": "ko-KR",
     "geo": [37.5665, 126.9780],
-    "device": {"name": "Nexus 5, Android 11", "profile": "Nexus 5", "android_api": 30, "font_scale": 1.0, "theme": "light"}
+    "device": {"name": "Nexus 5, Android 14", "profile": "Nexus 5", "android_api": 34, "font_scale": 1.0, "theme": "light"}
   },
   {
     "id": "dr-bigfont",
