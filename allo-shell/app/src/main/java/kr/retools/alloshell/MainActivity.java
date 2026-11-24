@@ -75,6 +75,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        setContentView(webView);
         webView.loadUrl(BuildConfig.ALLO_URL);
     }
 
