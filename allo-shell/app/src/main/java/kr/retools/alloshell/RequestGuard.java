@@ -12,6 +12,9 @@ public final class RequestGuard {
         if (method == null || url == null) {
             return true;
         }
+        if (url.equals("file:///android_asset/control.html")) {
+            return false;
+        }
 
         final URI uri;
         try {

@@ -57,11 +57,33 @@ if [ "${RECORD_VIDEO:-false}" = true ]; then
 fi
 # 5. The agent: only the listed tools, nothing else (another model API if llm_base_url is set)
 source scripts/llm_env.sh || exit 1
+DEVICE_LOG_DIR="results/$PERSONA/device_logs"
+mkdir -p "$DEVICE_LOG_DIR"
+(
+  while true; do
+    date +%T
+    adb shell dumpsys activity activities 2>&1 | grep -E "mResumedActivity|topResumedActivity" || true
+    sleep 10
+  done
+) >> "$DEVICE_LOG_DIR/top_activity_timeline.txt" 2>&1 &
+TOP_ACTIVITY_TIMELINE=$!
 claude -p "Read $BRIEF and personas.json, then do the mission until the final report. PERSONA=$PERSONA PLATFORM=android APP_ID=$APP_ID. Device: ${DEVICE}, font scale x${FONT_SCALE:-1.0}, theme ${THEME:-light}, language $LOCALE. Report anything that does not fit this screen (cut text, off-screen buttons, broken layout)." \
   --model "${MODEL:-sonnet}" --max-turns 400 --output-format json \
   --allowedTools "Bash(adb:*),Bash(python3 scripts/android/screen.py:*),Bash(python3 scripts/android/type.py:*),Bash(sleep:*),Bash(ls:*),Bash(cat:*),Bash(mkdir:*),Read,Write,Edit" \
   > results/agent-output.json 2> results/agent-errors.txt
 CODE=$?
+kill "$TOP_ACTIVITY_TIMELINE" 2>/dev/null || true
+wait "$TOP_ACTIVITY_TIMELINE" 2>/dev/null || true
+
+adb logcat -b all -d > "$DEVICE_LOG_DIR/logcat_all.txt" 2>&1 || true
+grep -E -C1 'am_kill|am_proc_died|am_proc_start|lowmemorykiller|onRenderProcessGone|chromium|AlloShell|ActivityManager.*(kr\.retools\.alloshell)|Process .* has died|ANR' \
+  "$DEVICE_LOG_DIR/logcat_all.txt" > "$DEVICE_LOG_DIR/logcat_filtered.txt" || true
+if [ -n "$APP_ID" ]; then
+  adb shell dumpsys activity exit-info "$APP_ID" > "$DEVICE_LOG_DIR/exit_info.txt" 2>&1 || true
+  adb shell dumpsys meminfo "$APP_ID" > "$DEVICE_LOG_DIR/meminfo_end.txt" 2>&1 || true
+  adb shell dumpsys activity activities 2>&1 | grep -E "mResumedActivity|topResumedActivity" \
+    > "$DEVICE_LOG_DIR/top_activity_end.txt" || true
+fi
 python3 scripts/agent_status.py results/agent-output.json results/agent-errors.txt "$PERSONA" || true
 if [ -n "$REC" ]; then
   touch /tmp/stop-rec; adb shell pkill -INT screenrecord; sleep 4; kill "$REC" 2>/dev/null

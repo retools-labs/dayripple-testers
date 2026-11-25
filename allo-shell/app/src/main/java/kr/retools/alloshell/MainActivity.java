@@ -6,6 +6,7 @@ import android.util.Log;
 import android.webkit.CookieManager;
 import android.webkit.GeolocationPermissions;
 import android.webkit.PermissionRequest;
+import android.webkit.RenderProcessGoneDetail;
 import android.webkit.ServiceWorkerClient;
 import android.webkit.ServiceWorkerController;
 import android.webkit.ValueCallback;
@@ -20,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 
 public class MainActivity extends Activity {
+    private static final String TAG = "AlloShell";
     private static final String GUARD_TAG = "AlloGuard";
     private static final String BLOCKED_BODY = "Blocked by Allo Shell test guard";
     private WebView webView;
@@ -27,6 +29,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate");
         WebView.setWebContentsDebuggingEnabled(true);
 
         webView = new WebView(this);
@@ -52,6 +55,13 @@ public class MainActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return blockUnsupportedScheme(url);
+            }
+
+            @Override
+            public boolean onRenderProcessGone(WebView view, RenderProcessGoneDetail detail) {
+                Log.w(TAG, "renderProcessGone didCrash=" + detail.didCrash()
+                        + " priorityAtExit=" + detail.rendererPriorityAtExit());
+                return false;
             }
         });
 
@@ -80,6 +90,49 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        Log.i(TAG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.i(TAG, "onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.i(TAG, "onDestroy isFinishing=" + isFinishing()
+                + " isChangingConfigurations=" + isChangingConfigurations());
+        super.onDestroy();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        Log.i(TAG, "onTrimMemory level=" + level);
+        super.onTrimMemory(level);
+    }
+
+    @Override
+    public void onLowMemory() {
+        Log.i(TAG, "onLowMemory");
+        super.onLowMemory();
+    }
+
+    @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
             webView.goBack();
@@ -103,6 +156,9 @@ public class MainActivity extends Activity {
     }
 
     private static boolean blockUnsupportedScheme(String url) {
+        if ("file:///android_asset/control.html".equals(url)) {
+            return false;
+        }
         if (url.regionMatches(true, 0, "http:", 0, 5)
                 || url.regionMatches(true, 0, "https:", 0, 6)) {
             return false;

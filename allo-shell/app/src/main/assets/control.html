@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Allo Shell Control</title>
+  <style>
+    body { font-family: sans-serif; margin: 32px; }
+    button { font-size: 24px; min-height: 72px; padding: 16px 24px; width: 100%; }
+  </style>
+</head>
+<body>
+  <h1>Allo Shell Control</h1>
+  <button id="tap" type="button">Tap count: 0</button>
+  <script>
+    let count = 0;
+    document.getElementById('tap').addEventListener('click', () => {
+      count += 1;
+      document.getElementById('tap').textContent = 'Tap count: ' + count;
+    });
+  </script>
+</body>
+</html>
