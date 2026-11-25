@@ -29,7 +29,7 @@ Also complete these checks:
 3. On a shop page, view the menu and add an item.
 4. Reach the order form, but stop immediately before its final send button.
 5. Change the screen language to another language, then change it back. Check for mixed or truncated text and whether the current state remains after each switch.
-6. Use the shop's `지도에서 보기` (View on map) action to open Google Maps in the WebView.
+6. Use the shop's `지도에서 보기` (View on map) action to open Google Maps in the WebView. Judge the result by the place card (shop name and address), not by where the map camera points: this emulator has no location, so the Google Maps web camera may sit on a default region (for example the USA) even when the card shows the right shop. If the card is hidden under the sheet, drag it up before reporting a wrong place.
 
 ## What the report must include
 
