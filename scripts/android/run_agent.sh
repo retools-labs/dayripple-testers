@@ -45,7 +45,7 @@ settle_gms() {
   if [ "${GMS_SETTLE:-true}" = false ]; then
     result=skipped
   else
-    while [ $(($(date +%s) - started_at)) -lt 150 ]; do
+    while [ $(($(date +%s) - started_at)) -lt 300 ]; do
       pid=$(adb shell pidof com.google.android.gms.persistent 2>/dev/null | tr -d '\r' | awk '{print $1}')
       if [ -z "$pid" ]; then
         pid=$(adb shell ps -A 2>/dev/null | grep 'com.google.android.gms.persistent' | awk 'NR == 1 {print $2}' | tr -d '\r')
@@ -53,7 +53,7 @@ settle_gms() {
 
       if [ -n "$pid" ] && [ "$pid" = "$last_pid" ]; then
         stable_checks=$((stable_checks + 1))
-        [ "$stable_checks" -ge 10 ] && { result=stable; break; }
+        [ "$stable_checks" -ge 40 ] && { result=stable; break; }
       else
         [ -n "$last_pid" ] && pid_changes=$((pid_changes + 1))
         stable_checks=0
