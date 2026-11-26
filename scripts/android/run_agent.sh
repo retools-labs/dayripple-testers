@@ -37,6 +37,38 @@ adb install -r -g app.apk || adb install -r app.apk
 adb shell settings put system font_scale "${FONT_SCALE:-1.0}"
 [ "${THEME:-light}" = dark ] && adb shell cmd uimode night yes
 adb emu geo fix "${GEO#*,}" "${GEO%,*}" >/dev/null 2>&1   # longitude first
+settle_gms() {
+  local log_dir="results/$PERSONA/device_logs" started_at elapsed pid last_pid="" stable_checks=0 pid_changes=0 result=timeout
+  mkdir -p "$log_dir"
+  started_at=$(date +%s)
+
+  if [ "${GMS_SETTLE:-true}" = false ]; then
+    result=skipped
+  else
+    while [ $(($(date +%s) - started_at)) -lt 150 ]; do
+      pid=$(adb shell pidof com.google.android.gms.persistent 2>/dev/null | tr -d '\r' | awk '{print $1}')
+      if [ -z "$pid" ]; then
+        pid=$(adb shell ps -A 2>/dev/null | grep 'com.google.android.gms.persistent' | awk 'NR == 1 {print $2}' | tr -d '\r')
+      fi
+
+      if [ -n "$pid" ] && [ "$pid" = "$last_pid" ]; then
+        stable_checks=$((stable_checks + 1))
+        [ "$stable_checks" -ge 10 ] && { result=stable; break; }
+      else
+        [ -n "$last_pid" ] && pid_changes=$((pid_changes + 1))
+        stable_checks=0
+      fi
+      last_pid=$pid
+      sleep 3
+    done
+  fi
+
+  elapsed=$(($(date +%s) - started_at))
+  [ "$result" = timeout ] && echo "WARNING: GMS settle timed out after ${elapsed}s; starting app anyway"
+  printf 'result=%s\nwait_seconds=%s\nlast_pid=%s\npid_changes=%s\n' \
+    "$result" "$elapsed" "$last_pid" "$pid_changes" > "$log_dir/gms_settle.txt"
+}
+settle_gms || true
 adb shell monkey -p "$APP_ID" -c android.intent.category.LAUNCHER 1 >/dev/null 2>&1
 adb logcat -c; sleep 5
 # 4. Optional screen recording, kept in results/ (encrypted like the rest)

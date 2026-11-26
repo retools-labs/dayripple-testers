@@ -34,3 +34,7 @@ Also complete these checks:
 ## What the report must include
 
 In addition to every item required by `AGENT_BRIEF.md`, report mixed languages, clipped text, shifted layouts, awkward translations, text left in another language after switching, whether View on map worked, and every dead end. Include the final button name and screenshot when you stop before it.
+
+## Priority checks (11/26, keep even if over budget)
+- On the 옴쎄 (Omsse, Daegu) page, scroll to the location section and use its Google Maps action once; report whether the place card shows the Omsse shop or an empty/wrong place.
+- On the 하르당 수영역점 page, scroll to the menu and report whether it loads or stays on a loading state.
